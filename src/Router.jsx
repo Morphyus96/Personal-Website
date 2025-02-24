@@ -1,13 +1,40 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Navigate, Routes, Route, useNavigate } from 'react-router-dom';
+
+import Home from './Pages/Home';
+import Blog from './Pages/Blog';
+import Projects from './Pages/Projects';
 
 function Router() {
-  console.log('Router component rendered')
+  const navigate = useNavigate();
+
+  const header = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  }
+
+  const buttonBox = {
+    display: 'flex',
+    gap: '10px'
+  }
 
   return (
-    <Routes>
-      <Route path="/" element={<div>Hello</div>} />
-    </Routes>
+    <>
+      <div id="header" style={header}>
+        <h1>RJF</h1>
+        <span id="button-box" style={buttonBox}>
+          <button onClick={() => navigate('/')}>Home</button>
+          <button onClick={() => navigate('/blog')}>Blog</button>
+          <button onClick={() => navigate('/projects')}>Projects</button>
+        </span>
+      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<Blog />}/>
+        <Route path="/projects" element={<Projects />}/>
+      </Routes>
+    </>
   )
 }
 
